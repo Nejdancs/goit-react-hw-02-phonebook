@@ -12,11 +12,13 @@ import {
 } from './AddContactsForm.styled';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+
 const phoneRegExp =
   /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
 
 const schema = yup.object().shape({
-  name: yup.string().min(3).required(),
+  name: yup.string().min(3).matches(nameRegExp, 'Name is not valid').required(),
   number: yup
     .string()
     .matches(phoneRegExp, 'Phone number is not valid')
