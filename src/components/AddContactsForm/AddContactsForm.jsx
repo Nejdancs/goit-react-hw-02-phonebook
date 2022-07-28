@@ -33,7 +33,9 @@ const initialValues = {
 
 const AddContactsForm = ({ addContact, contacts, toggle }) => {
   const handleSubmit = (values, { resetForm }) => {
-    const isInclude = contacts.some(contact => contact.name === values.name);
+    const isInclude = contacts.some(
+      contact => contact.name.toLowerCase() === values.name.toLowerCase()
+    );
     if (isInclude) {
       Notify.failure(`${values.name} is already in contacts`);
       return;
